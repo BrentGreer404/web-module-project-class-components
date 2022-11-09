@@ -4,10 +4,11 @@ import Todo from './Todo'
 export default class TodoList extends React.Component {
   render() {
     return (
-      <div>Todos
+      <div>
+        <h2>Todos</h2>
         {console.log(this.props.todos)}
         {this.props.todos.map(item => (
-          <Todo item={item} key={item.id}></Todo>
+          <Todo item={item} key={item.id} toggle={this.props.toggle}></Todo>
         ))}
       </div>
     )
