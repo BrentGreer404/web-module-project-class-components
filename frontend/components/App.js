@@ -24,17 +24,15 @@ export default class App extends React.Component {
           id: 345,
           done: false
         },
-      ], 
+      ],
     }
   }
 
+
   clearComplete = () => {
     this.setState({...this.state, todos: this.state.todos.filter((v) => v.done === false)})
-    console.log("Clear")
   }
-  addTask = (task) => {
-
-  }
+  
   toggleComplete = (item) => {
     this.setState({...this.state, todos: this.state.todos.map((v) => {
       if (v.id === item.id) {
@@ -44,6 +42,15 @@ export default class App extends React.Component {
     })})
   }
 
+  addTodo = (item) => {
+    const newItem = {
+      name: item,
+      id: Date.now(),
+      done: false
+    }
+    this.setState({...this.state, todos: [...this.state.todos, newItem]})
+  }
+
   render() {
     return (
       <div>
@@ -51,9 +58,10 @@ export default class App extends React.Component {
         todos={this.state.todos}
         toggle={(i) => this.toggleComplete(i)}>
         </TodoList>
-        <Form 
-          clear={() => this.clearComplete}>
-        </Form>
+        <Form add={this.addTodo}></Form>
+        <div>
+          <button onClick={this.clearComplete}>Hide Completed</button>
+        </div>
       </div>
     )
   }
